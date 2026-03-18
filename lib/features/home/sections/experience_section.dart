@@ -8,31 +8,15 @@ class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});
 
   static const _experiences = [
-    _Experience(
-      company: 'Acme Corp',
-      role: 'Senior Flutter Developer',
-      duration: '2023 – Present',
-      description:
-          'Led mobile development for a fintech app serving 200k+ users. Built real-time features with WebSockets, implemented BLoC architecture across the team.',
-      tags: ['Flutter', 'Firebase', 'BLoC', 'WebSocket'],
-    ),
-    _Experience(
-      company: 'Startup XYZ',
-      role: 'Flutter Developer',
-      duration: '2021 – 2023',
-      description:
-          'Built and shipped two cross-platform apps from scratch. Integrated payment gateways, push notifications, and offline-first data sync.',
-      tags: ['Flutter', 'Hive', 'REST API', 'Riverpod'],
-    ),
-    _Experience(
-      company: 'Freelance',
-      role: 'Mobile App Developer',
-      duration: '2020 – 2021',
-      description:
-          'Delivered 5+ client projects including an e-commerce app, a fitness tracker, and a food delivery app.',
-      tags: ['Flutter', 'Firebase', 'Google Maps'],
-    ),
-  ];
+  _Experience(
+    company: 'Solutions Infoway Support Services Pvt.Ltd',
+    role: 'Mobile App Developer',
+    duration: 'May 2024 – Present',
+    description:
+        'Led development of the company\'s flagship product using Flutter across Android and iOS. Managed full deployment pipeline on Play Store and App Store. Designed core features including API integration, complex state management, and responsive UI/UX.',
+    tags: ['Flutter', 'BLoC', 'Razorpay', 'REST API','Play Store & App Store Management'],
+  ),
+];
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +68,7 @@ class _ExperienceItem extends StatelessWidget {
     final isMobile =
         MediaQuery.of(context).size.width < 600;
     final textColor = theme.colorScheme.onSurface;
-    final mutedColor = theme.colorScheme.onSurface.withOpacity(0.55);
+    final mutedColor = theme.colorScheme.onSurface.withValues(alpha:0.55);
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),

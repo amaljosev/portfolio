@@ -30,7 +30,7 @@ class HeaderSection extends StatelessWidget {
     return Container(
       height: 72,
       decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor.withOpacity(0.92),
+        color: theme.scaffoldBackgroundColor.withValues(alpha:0.92),
         border: Border(
           bottom: BorderSide(
             color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
@@ -46,12 +46,22 @@ class HeaderSection extends StatelessWidget {
               children: [
                 // Logo
                 Text(
-                  '${AppConstants.name.split(' ').first}.',
+                  AppConstants.name.split(' ').first,
                   style: TextStyle(
                     fontFamily: 'Syne',
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
                     color: theme.colorScheme.primary,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                Text(
+                  '.',
+                  style: TextStyle(
+                    fontFamily: 'Syne',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                    color: theme.colorScheme.onPrimary,
                     letterSpacing: -0.5,
                   ),
                 ),
@@ -139,7 +149,7 @@ class _NavLinkState extends State<_NavLink> {
               fontWeight: FontWeight.w500,
               color: _hovered
                   ? theme.colorScheme.primary
-                  : theme.colorScheme.onSurface.withOpacity(0.55),
+                  : theme.colorScheme.onSurface.withValues(alpha:0.55),
             ),
             child: Text(widget.label),
           ),

@@ -21,7 +21,7 @@ class LandingSection extends StatelessWidget {
     final theme = Theme.of(context);
     final isMobile = ResponsiveBuilder.isMobile(context);
     final textColor = theme.colorScheme.onSurface;
-    final mutedColor = theme.colorScheme.onSurface.withOpacity(0.55);
+    final mutedColor = theme.colorScheme.onSurface.withValues(alpha:0.55);
 
     return SectionWrapper(
       padding: EdgeInsets.symmetric(
@@ -150,7 +150,7 @@ class _PrimaryButtonState extends State<_PrimaryButton> {
             color: Theme.of(context)
                 .colorScheme
                 .primary
-                .withOpacity(_hovered ? 0.85 : 1.0),
+                .withValues(alpha:_hovered ? 0.85 : 1.0),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(

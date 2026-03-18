@@ -12,14 +12,15 @@ class ContactSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textColor = theme.colorScheme.onSurface;
-    final mutedColor = theme.colorScheme.onSurface.withOpacity(0.55);
+    final mutedColor = theme.colorScheme.onSurface.withValues(alpha: 0.55);
 
     return Container(
       color: theme.cardColor,
       child: Center(
         child: ConstrainedBox(
-          constraints:
-              const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxContentWidth,
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.xxxl,
@@ -69,20 +70,17 @@ class ContactSection extends StatelessWidget {
                       _ContactLink(
                         icon: Icons.email_outlined,
                         label: AppConstants.email,
-                        onTap: () =>
-                            UrlHelper.sendEmail(AppConstants.email),
+                        onTap: () => UrlHelper.sendEmail(AppConstants.email),
                       ),
                       _ContactLink(
                         icon: Icons.code_rounded,
                         label: 'GitHub',
-                        onTap: () =>
-                            UrlHelper.openUrl(AppConstants.github),
+                        onTap: () => UrlHelper.openUrl(AppConstants.github),
                       ),
                       _ContactLink(
                         icon: Icons.work_outline_rounded,
                         label: 'LinkedIn',
-                        onTap: () =>
-                            UrlHelper.openUrl(AppConstants.linkedin),
+                        onTap: () => UrlHelper.openUrl(AppConstants.linkedin),
                       ),
                     ],
                   ),
@@ -95,24 +93,53 @@ class ContactSection extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xl),
                 FadeInWidget(
                   delay: const Duration(milliseconds: 300),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '© 2025 ${AppConstants.name}. All rights reserved.',
-                        style: AppTextStyles.bodySmall(mutedColor),
-                      ),
-                      Row(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isMobile = constraints.maxWidth < 600;
+                      if (isMobile) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '© 2026 ${AppConstants.name}. All rights reserved.',
+                              style: AppTextStyles.bodySmall(mutedColor),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                _PulsingDot(color: theme.colorScheme.primary),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Available for freelance',
+                                  style: AppTextStyles.bodySmall(mutedColor),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      }
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _PulsingDot(color: theme.colorScheme.primary),
-                          const SizedBox(width: 6),
                           Text(
-                            'Available for freelance',
+                            '© 2026 ${AppConstants.name}. All rights reserved.',
                             style: AppTextStyles.bodySmall(mutedColor),
                           ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              _PulsingDot(color: theme.colorScheme.primary),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Available for freelance',
+                                style: AppTextStyles.bodySmall(mutedColor),
+                              ),
+                            ],
+                          ),
                         ],
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ],
@@ -128,8 +155,11 @@ class _ContactLink extends StatefulWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
-  const _ContactLink(
-      {required this.icon, required this.label, required this.onTap});
+  const _ContactLink({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
 
   @override
   State<_ContactLink> createState() => _ContactLinkState();
@@ -143,19 +173,19 @@ class _ContactLinkState extends State<_ContactLink> {
     final theme = Theme.of(context);
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
-      onExit:  (_) => setState(() => _hovered = false),
+      onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.lg, vertical: 12),
+            horizontal: AppSpacing.lg,
+            vertical: 12,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: _hovered
-                  ? theme.colorScheme.primary
-                  : theme.dividerColor,
+              color: _hovered ? theme.colorScheme.primary : theme.dividerColor,
             ),
           ),
           child: Row(
@@ -166,7 +196,7 @@ class _ContactLinkState extends State<_ContactLink> {
                 size: 16,
                 color: _hovered
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.onSurface.withOpacity(0.7),
+                    : theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
@@ -208,9 +238,10 @@ class _PulsingDotState extends State<_PulsingDot>
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
-    _anim = Tween<double>(begin: 1.0, end: 0.3).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _anim = Tween<double>(
+      begin: 1.0,
+      end: 0.3,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -224,11 +255,9 @@ class _PulsingDotState extends State<_PulsingDot>
     return FadeTransition(
       opacity: _anim,
       child: Container(
-        width: 6, height: 6,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: widget.color,
-        ),
+        width: 6,
+        height: 6,
+        decoration: BoxDecoration(shape: BoxShape.circle, color: widget.color),
       ),
     );
   }

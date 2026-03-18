@@ -12,22 +12,19 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ThemeBloc(),
-      child: const AppView(),
-    );
+    return BlocProvider(create: (_) => ThemeBloc(), child: const MyApp());
   }
 }
 
-class AppView extends StatelessWidget {
-  const AppView({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return MaterialApp.router(
-          title: 'Your Name — Flutter Developer',
+          title: 'Amal Jose — Flutter Developer',
           debugShowCheckedModeBanner: false,
           theme: state.themeData,
           routerConfig: AppRouter.router,

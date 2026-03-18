@@ -9,8 +9,8 @@ class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
   static const _skills = [
-    'Flutter', 'Dart', 'BLoC', 'Firebase',
-    'REST APIs', 'Git', 'Clean Arch', 'UI/UX',
+    'Flutter', 'Dart', 'BLoC','GetX', 'Firebase', 'Razorpay', 'Supabase',
+    'REST APIs', 'Git', 'Clean Arch', 'UI/UX','Figma',
     'Go Router', 'Hive', 'SQLite', 'CI/CD',
   ];
 
@@ -19,7 +19,7 @@ class AboutSection extends StatelessWidget {
     final theme = Theme.of(context);
     final isMobile = ResponsiveBuilder.isMobile(context);
     final textColor = theme.colorScheme.onSurface;
-    final mutedColor = theme.colorScheme.onSurface.withOpacity(0.55);
+    final mutedColor = theme.colorScheme.onSurface.withValues(alpha:0.55);
 
     return Container(
       decoration: BoxDecoration(
