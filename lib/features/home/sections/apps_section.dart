@@ -13,28 +13,38 @@ class AppsSection extends StatelessWidget {
     _App(
       name: 'Pursuit',
       description:
-          'Habit tracker with goal-based tracking, streak monitoring, FL Chart visualizations, local notifications, and offline SQLite persistence.',
-      image: 'assets/images/pursuit_icon.png',
+          'A production-ready habit tracker built with Clean Architecture, SQLite, and FL Chart. Features streak tracking, partial progress logging, and local notifications.',
+      image: 'assets/images/pursuit_icon.webp',
       playStoreUrl: AppConstants.pursuitAppLink,
       githubUrl: AppConstants.pursuitGitLink,
     ),
     _App(
       name: 'Routine',
       description:
-          'Personal productivity app with an interactive diary, gesture-based sticker overlays, Supabase asset delivery, and offline SQLite storage.',
-      image: 'assets/images/routine_icon.png',
+          'Full-featured productivity app with an interactive diary, gesture-based sticker overlays, Supabase integration, and offline-first SQLite storage.',
+      image: 'assets/images/routine_icon.webp',
       playStoreUrl: AppConstants.routineAppLink,
       githubUrl: AppConstants.routineGitLink,
+    ),
+    
+    _App(
+      name: 'Ddata App',
+      description:
+          'Feature-rich platform for digital business cards, brand coupons, and web tools — built with Flutter, BLoC, and REST APIs. Structured with MVC architecture for clean separation of concerns.',
+      image: 'assets/images/ddata_icon.webp',
+      playStoreUrl: AppConstants.ddataPlayStoreLink,
+      appStoreUrl: AppConstants.ddataAppStoreLink,
     ),
     _App(
       name: 'Edu Plan',
       description:
-          'Comprehensive school management app with attendance tracking, task assignment, real-time chat, and secure fee management via Razorpay.',
-      image: 'assets/images/eduplan_icon.png',
-      playStoreUrl: AppConstants.eduPlanAppLink,
+          'School management platform live on Amazon App Store. Built with BLoC, Firebase real-time chat, and Razorpay payment gateway.',
+      image: 'assets/images/eduplan_icon.webp',
+      amazonStoreUrl: AppConstants.eduPlanAppLink,
       githubUrl: AppConstants.eduPlanGitLink,
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -233,19 +243,33 @@ class _AppCardState extends State<_AppCard> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                // Buttons
+                // Buttons — only renders if url is provided
                 Wrap(
                   spacing: AppSpacing.sm,
                   runSpacing: AppSpacing.sm,
                   children: [
-                    _AppLinkButton(
-                      label: 'Play Store',
-                      onTap: () => UrlHelper.openUrl(widget.app.playStoreUrl),
-                    ),
-                    _AppLinkButton(
-                      label: 'GitHub',
-                      onTap: () => UrlHelper.openUrl(widget.app.githubUrl),
-                    ),
+                    if (widget.app.playStoreUrl != null)
+                      _AppLinkButton(
+                        label: 'Play Store',
+                        onTap: () =>
+                            UrlHelper.openUrl(widget.app.playStoreUrl!),
+                      ),
+                    if (widget.app.appStoreUrl != null)
+                      _AppLinkButton(
+                        label: 'App Store',
+                        onTap: () => UrlHelper.openUrl(widget.app.appStoreUrl!),
+                      ),
+                    if (widget.app.amazonStoreUrl != null)
+                      _AppLinkButton(
+                        label: 'Amazon Store',
+                        onTap: () =>
+                            UrlHelper.openUrl(widget.app.amazonStoreUrl!),
+                      ),
+                    if (widget.app.githubUrl != null)
+                      _AppLinkButton(
+                        label: 'GitHub',
+                        onTap: () => UrlHelper.openUrl(widget.app.githubUrl!),
+                      ),
                   ],
                 ),
               ],
@@ -307,13 +331,18 @@ class _App {
   final String name;
   final String description;
   final String image;
-  final String playStoreUrl;
-  final String githubUrl;
+  final String? playStoreUrl;
+  final String? appStoreUrl;
+  final String? amazonStoreUrl;
+  final String? githubUrl;
+
   const _App({
     required this.name,
     required this.description,
     required this.image,
-    required this.playStoreUrl,
-    required this.githubUrl,
+    this.playStoreUrl,
+    this.appStoreUrl,
+    this.amazonStoreUrl,
+    this.githubUrl,
   });
 }

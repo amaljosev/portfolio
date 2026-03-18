@@ -8,6 +8,10 @@ class AppConstants {
   static const String email = 'amaljosevofficial@email.com';
   static const String github = 'https://github.com/amaljosev';
   static const String linkedin = 'https://www.linkedin.com/in/amaljosev/';
+  static const String ddataAppStoreLink =
+      'https://apps.apple.com/in/app/ddata-digilife-app/id6753895282';
+      static const String ddataPlayStoreLink =
+      'https://play.google.com/store/apps/details?id=com.theddata.ddata';
   static const String eduPlanAppLink =
       'https://www.amazon.com/gp/product/B0CP4GCR1B';
   static const String eduPlanGitLink = 'https://github.com/amaljosev/Edu-plan';
