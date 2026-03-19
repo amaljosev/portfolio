@@ -69,7 +69,7 @@ class AppsSection extends StatelessWidget {
           children: [
             FadeInWidget(
               child: Text(
-                '03. My apps',
+                '04. My apps',
                 style: TextStyle(
                   fontFamily: 'Inter',
                   fontSize: 12,

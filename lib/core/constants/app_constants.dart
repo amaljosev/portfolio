@@ -4,7 +4,7 @@ class AppConstants {
   static const String name = 'Amal Jose';
   static const String role = 'Flutter Developer';
   static const String tagline =
-      'Building beautiful, high-performance apps for Android, iOS & Web.';
+      'Building beautiful, high-performance apps that users love.';
   static const String email = 'amaljosevofficial@email.com';
   static const String github = 'https://github.com/amaljosev';
   static const String linkedin = 'https://www.linkedin.com/in/amaljosev/';

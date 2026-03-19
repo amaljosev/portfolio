@@ -11,7 +11,7 @@ class SkillsSection extends StatelessWidget {
   static const _skillGroups = [
     _SkillGroup(
       label: 'Languages',
-      skills: ['Dart', 'Python', 'SQL','C','C++'],
+      skills: ['Dart', 'Python', 'SQL', 'C', 'C++'],
     ),
     _SkillGroup(
       label: 'Platforms',
@@ -22,7 +22,7 @@ class SkillsSection extends StatelessWidget {
       skills: ['Flutter', 'BLoC', 'GetX', 'Provider', 'Riverpod'],
     ),
     _SkillGroup(
-      label: 'Architecture & Patterns',
+      label: 'Architecture',
       skills: ['Clean Architecture', 'MVC', 'OOP', 'Functional Programming', 'Error Handling'],
     ),
     _SkillGroup(
@@ -34,7 +34,7 @@ class SkillsSection extends StatelessWidget {
       skills: ['Flutter Animations', 'Local Notifications', 'Play Store', 'App Store', 'UI/UX'],
     ),
     _SkillGroup(
-      label: 'Tools & Design',
+      label: 'Tools',
       skills: ['Git', 'Figma', 'VS Code', 'Android Studio', 'Xcode'],
     ),
   ];
@@ -44,113 +44,118 @@ class SkillsSection extends StatelessWidget {
     final theme = Theme.of(context);
     final textColor = theme.colorScheme.onSurface;
     final isMobile = ResponsiveBuilder.isMobile(context);
-    final isTablet = ResponsiveBuilder.isTablet(context);
-    final columns = isMobile ? 1 : isTablet ? 2 : 3;
 
-    return SectionWrapper(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FadeInWidget(
-            child: Text(
-              '02. Skills',
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 2,
-                color: theme.colorScheme.primary,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: theme.dividerColor),
+          bottom: BorderSide(color: theme.dividerColor),
+        ),
+      ),
+      child: SectionWrapper(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FadeInWidget(
+              child: Text(
+                '02. Skills',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 2,
+                  color: theme.colorScheme.primary,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          FadeInWidget(
-            delay: const Duration(milliseconds: 100),
-            child: Text(
-              'What I work with.',
-              style: AppTextStyles.headlineLarge(textColor),
+            const SizedBox(height: AppSpacing.lg),
+            FadeInWidget(
+              delay: const Duration(milliseconds: 100),
+              child: Text(
+                'What I work with.',
+                style: AppTextStyles.headlineLarge(textColor),
+              ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.xxxl),
+            const SizedBox(height: AppSpacing.xxxl),
 
-          // Grid of skill groups
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: columns,
-              crossAxisSpacing: AppSpacing.lg,
-              mainAxisSpacing: AppSpacing.lg,
-              childAspectRatio: isMobile ? 2.5 : 1.7,
-            ),
-            itemCount: _skillGroups.length,
-            itemBuilder: (context, i) => FadeInWidget(
-              delay: Duration(milliseconds: 150 + i * 80),
-              child: _SkillGroupCard(group: _skillGroups[i]),
-            ),
-          ),
-        ],
+            // Skill rows
+            ..._skillGroups.asMap().entries.map((entry) {
+              final i = entry.key;
+              final group = entry.value;
+              return FadeInWidget(
+                delay: Duration(milliseconds: 150 + i * 60),
+                child: _SkillRow(group: group, isMobile: isMobile),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _SkillGroupCard extends StatelessWidget {
+class _SkillRow extends StatelessWidget {
   final _SkillGroup group;
-  const _SkillGroupCard({required this.group});
+  final bool isMobile;
+  const _SkillRow({required this.group, required this.isMobile});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final mutedColor = theme.colorScheme.onSurface.withValues(alpha: 0.4);
 
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: theme.dividerColor, width: 0.5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Category label
-          Row(
-            children: [
-              Container(
-                width: 3,
-                height: 14,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(2),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+          child: isMobile
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildLabel(mutedColor),
+                    const SizedBox(height: AppSpacing.md),
+                    _buildChips(theme),
+                  ],
+                )
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Left — category label
+                    SizedBox(
+                      width: 180,
+                      child: _buildLabel(mutedColor),
+                    ),
+                    const SizedBox(width: AppSpacing.xl),
+                    // Right — chips
+                    Expanded(child: _buildChips(theme)),
+                  ],
                 ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Text(
-                group.label.toUpperCase(),
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.5,
-                  color: mutedColor,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.md),
-          // Chips
-          Expanded(
-            child: Wrap(
-              spacing: AppSpacing.sm,
-              runSpacing: AppSpacing.sm,
-              children: group.skills
-                  .map((skill) => _SkillChip(label: skill))
-                  .toList(),
-            ),
-          ),
-        ],
+        ),
+        Divider(color: theme.dividerColor, height: 0.5, thickness: 0.5),
+      ],
+    );
+  }
+
+  Widget _buildLabel(Color mutedColor) {
+    return Text(
+      group.label.toUpperCase(),
+      style: TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.5,
+        color: mutedColor,
       ),
+    );
+  }
+
+  Widget _buildChips(ThemeData theme) {
+    return Wrap(
+      spacing: AppSpacing.sm,
+      runSpacing: AppSpacing.sm,
+      children: group.skills
+          .map((skill) => _SkillChip(label: skill))
+          .toList(),
     );
   }
 }
@@ -177,14 +182,14 @@ class _SkillChipState extends State<_SkillChip> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.sm + 2,
-          vertical: AppSpacing.xs + 1,
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.xs + 2,
         ),
         decoration: BoxDecoration(
           color: _hovered
               ? theme.colorScheme.primary
               : isDark
-                  ? const Color(0xFF1E1A10)
+                  ? Color(0xFF1E1D2E)
                   : const Color(0xFFF5EDD6),
           borderRadius: BorderRadius.circular(5),
           border: Border.all(
@@ -198,9 +203,11 @@ class _SkillChipState extends State<_SkillChip> {
           widget.label,
           style: TextStyle(
             fontFamily: 'Inter',
-            fontSize: 12,
+            fontSize: 13,
             fontWeight: FontWeight.w500,
-            color: _hovered ? Colors.white : theme.colorScheme.primary,
+            color: _hovered
+                ? Colors.white
+                : theme.colorScheme.primary,
           ),
         ),
       ),

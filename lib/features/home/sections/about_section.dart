@@ -87,7 +87,7 @@ class AboutSection extends StatelessWidget {
           child: Image.asset(
             'assets/images/profile_pic.jpeg',
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
+            errorBuilder: (_, _, _) => Container(
               decoration: BoxDecoration(
                 color: theme.cardColor,
                 borderRadius: BorderRadius.circular(16),

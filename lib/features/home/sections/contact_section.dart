@@ -31,7 +31,7 @@ class ContactSection extends StatelessWidget {
               children: [
                 FadeInWidget(
                   child: Text(
-                    '04. Contact',
+                    '05. Contact',
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 12,

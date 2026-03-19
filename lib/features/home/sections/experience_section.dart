@@ -13,7 +13,7 @@ class ExperienceSection extends StatelessWidget {
     role: 'Mobile App Developer',
     duration: 'May 2024 – Present',
     description:
-        'Led development of the company\'s flagship product using Flutter across Android and iOS. Managed full deployment pipeline on Play Store and App Store. Designed core features including API integration, complex state management, and responsive UI/UX.',
+        'Flutter Developer responsible for end-to-end mobile development across Android and iOS. Contributed to planning, built and maintained the full frontend, integrated backend APIs, implemented complex state management, and managed app deployment and updates on Play Store and App Store.',
     tags: ['Flutter', 'BLoC', 'Razorpay', 'REST API','Play Store & App Store Management'],
   ),
 ];
@@ -29,7 +29,7 @@ class ExperienceSection extends StatelessWidget {
         children: [
           FadeInWidget(
             child: Text(
-              '02. Experience',
+              '03. Experience',
               style: TextStyle(
                 fontFamily: 'Inter',
                 fontSize: 12,

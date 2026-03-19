@@ -15,10 +15,10 @@ import '../../../core/utils/scroll_service.dart';
 class _SmoothScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.trackpad,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.trackpad,
+  };
 
   @override
   Widget buildScrollbar(
@@ -44,12 +44,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
 
-  final GlobalKey _landingKey    = GlobalKey();
-  final GlobalKey _aboutKey      = GlobalKey();
-  final GlobalKey _skillsKey      = GlobalKey();
+  final GlobalKey _landingKey = GlobalKey();
+  final GlobalKey _aboutKey = GlobalKey();
+  final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _experienceKey = GlobalKey();
-  final GlobalKey _appsKey       = GlobalKey();
-  final GlobalKey _contactKey    = GlobalKey();
+  final GlobalKey _appsKey = GlobalKey();
+  final GlobalKey _contactKey = GlobalKey();
 
   @override
   void dispose() {
@@ -74,17 +74,17 @@ class _HomePageState extends State<HomePage> {
             // Fixed header as sliver
             SliverPersistentHeader(
               pinned: true,
-              
+
               delegate: _HeaderDelegate(
                 child: HeaderSection(
                   isDark: isDark,
                   onThemeToggle: () =>
                       context.read<ThemeBloc>().add(ToggleThemeEvent()),
-                  onAbout:      () => _scrollTo(_aboutKey),
-                   onSkills: () => _scrollTo(_skillsKey),
+                  onAbout: () => _scrollTo(_aboutKey),
+                  onSkills: () => _scrollTo(_skillsKey),
                   onExperience: () => _scrollTo(_experienceKey),
-                  onApps:       () => _scrollTo(_appsKey),
-                  onContact:    () => _scrollTo(_contactKey),
+                  onApps: () => _scrollTo(_appsKey),
+                  onContact: () => _scrollTo(_contactKey),
                 ),
               ),
             ),
@@ -96,10 +96,10 @@ class _HomePageState extends State<HomePage> {
                   LandingSection(
                     key: _landingKey,
                     onViewApps: () => _scrollTo(_appsKey),
-                    onContact:  () => _scrollTo(_contactKey),
+                    onContact: () => _scrollTo(_contactKey),
                   ),
                   AboutSection(key: _aboutKey),
-                  SkillsSection(key: _skillsKey), 
+                  SkillsSection(key: _skillsKey),
                   ExperienceSection(key: _experienceKey),
                   AppsSection(key: _appsKey),
                   ContactSection(key: _contactKey),
@@ -133,6 +133,5 @@ class _HeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_HeaderDelegate oldDelegate) =>
-      oldDelegate.child != child;
+  bool shouldRebuild(_HeaderDelegate oldDelegate) => oldDelegate.child != child;
 }
