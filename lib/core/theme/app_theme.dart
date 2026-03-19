@@ -25,6 +25,10 @@ class AppTheme {
             side: const BorderSide(color: AppColors.lightBorder),
           ),
         ),
+        scrollbarTheme: ScrollbarThemeData(
+  thumbVisibility: WidgetStateProperty.all(false),
+  trackVisibility: WidgetStateProperty.all(false),
+),
       );
 
   static ThemeData get dark => ThemeData(
@@ -48,5 +52,9 @@ class AppTheme {
             side: const BorderSide(color: AppColors.darkBorder),
           ),
         ),
+        scrollbarTheme: ScrollbarThemeData(
+  thumbVisibility: WidgetStateProperty.all(false),
+  trackVisibility: WidgetStateProperty.all(false),
+),
       );
 }

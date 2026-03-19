@@ -171,7 +171,7 @@ class _SkillChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark
             ? const Color(0xFF1E1D2E)
-            : const Color(0xFFEEEDFE),
+            : Color(0xFFF5EDD6),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(

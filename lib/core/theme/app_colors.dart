@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  // --- Light Theme ---
-  static const lightBackground = Color(0xFFF8F8F5);
-  static const lightSurface    = Color(0xFFFFFFFF);
-  static const lightPrimary    = Color(0xFF0F0F0F);
-  static const lightSecondary  = Color(0xFF555555);
-  static const lightAccent     = Color(0xFF6C63FF);
-  static const lightBorder     = Color(0xFFE5E5E5);
-  static const lightCard       = Color(0xFFFFFFFF);
+  // --- Light Theme --- (warm premium off-white)
+  static const lightBackground = Color(0xFFF5F4EF); // warm parchment
+  static const lightSurface    = Color(0xFFFAF9F6); // soft cream
+  static const lightPrimary    = Color(0xFF1A1A2E); // deep navy text
+  static const lightSecondary  = Color(0xFFF5EDD6); // muted slate
+static const lightAccent  = Color(0xFFB8860B); // keep your purple
+  static const lightBorder     = Color(0xFFE8E6DF); // warm border
+  static const lightCard       = Color(0xFFFAF9F6); // soft cream card
 
-  // --- Dark Theme ---
+  // --- Dark Theme --- 
   static const darkBackground  = Color(0xFF0D0D0D);
   static const darkSurface     = Color(0xFF161616);
   static const darkPrimary     = Color(0xFFF2F2F2);

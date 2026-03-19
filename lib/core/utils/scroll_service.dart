@@ -7,7 +7,7 @@ class ScrollService {
     final box = context.findRenderObject() as RenderBox?;
     if (box == null) return;
     final offset = box.localToGlobal(Offset.zero, ancestor: null).dy +
-        controller.offset - 80; // 80 = header height offset
+        controller.offset - 80; 
     controller.animateTo(
       offset.clamp(0, controller.position.maxScrollExtent),
       duration: const Duration(milliseconds: 600),
