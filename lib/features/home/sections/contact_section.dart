@@ -22,9 +22,11 @@ class ContactSection extends StatelessWidget {
             maxWidth: AppSpacing.maxContentWidth,
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.xxxl,
-              vertical: AppSpacing.sectionPaddingV,
+            padding: const EdgeInsets.only(
+              left: AppSpacing.xxxl,
+              right: AppSpacing.xxxl,
+              top: AppSpacing.sectionPaddingV,
+              bottom: AppSpacing.xl,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +92,7 @@ class ContactSection extends StatelessWidget {
                   delay: const Duration(milliseconds: 250),
                   child: Divider(color: theme.dividerColor),
                 ),
-                const SizedBox(height: AppSpacing.xl),
+                const SizedBox(height: AppSpacing.sm),
                 FadeInWidget(
                   delay: const Duration(milliseconds: 300),
                   child: LayoutBuilder(
@@ -98,7 +100,7 @@ class ContactSection extends StatelessWidget {
                       final isMobile = constraints.maxWidth < 600;
                       if (isMobile) {
                         return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               '© 2026 ${AppConstants.name}. All rights reserved.',
@@ -116,6 +118,22 @@ class ContactSection extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Built with ',
+                                  style: AppTextStyles.bodySmall(mutedColor),
+                                ),
+                                Text(
+                                  'Flutter',
+                                  style: AppTextStyles.bodySmall(
+                                    theme.colorScheme.primary,
+                                  ).copyWith(fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
                           ],
                         );
                       }
@@ -126,6 +144,22 @@ class ContactSection extends StatelessWidget {
                             '© 2026 ${AppConstants.name}. All rights reserved.',
                             style: AppTextStyles.bodySmall(mutedColor),
                           ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Built with ',
+                                style: AppTextStyles.bodySmall(mutedColor),
+                              ),
+                              Text(
+                                'Flutter',
+                                style: AppTextStyles.bodySmall(
+                                  theme.colorScheme.primary,
+                                ).copyWith(fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                          // Right — Available for freelance
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -142,6 +176,7 @@ class ContactSection extends StatelessWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: AppSpacing.lg),
               ],
             ),
           ),

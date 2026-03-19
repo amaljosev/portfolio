@@ -15,10 +15,10 @@ import '../../../core/utils/scroll_service.dart';
 class _SmoothScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-    PointerDeviceKind.trackpad,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.trackpad,
+      };
 
   @override
   Widget buildScrollbar(
@@ -26,11 +26,7 @@ class _SmoothScrollBehavior extends MaterialScrollBehavior {
     Widget child,
     ScrollableDetails details,
   ) {
-    return Scrollbar(
-      controller: details.controller,
-      thumbVisibility: false,
-      child: child,
-    );
+    return child;
   }
 }
 
@@ -62,41 +58,44 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isDark = context.watch<ThemeBloc>().state.isDark;
+Widget build(BuildContext context) {
+  final isDark = context.watch<ThemeBloc>().state.isDark;
 
-    return Scaffold(
-      body: ScrollConfiguration(
+  return Scaffold(
+    body: Scrollbar(
+      controller: _scrollController,
+      thumbVisibility: true,
+      interactive: false,
+
+      thickness: 4,
+      radius: const Radius.circular(8),
+      child: ScrollConfiguration(
         behavior: _SmoothScrollBehavior(),
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            // Fixed header as sliver
             SliverPersistentHeader(
               pinned: true,
-
               delegate: _HeaderDelegate(
                 child: HeaderSection(
                   isDark: isDark,
                   onThemeToggle: () =>
                       context.read<ThemeBloc>().add(ToggleThemeEvent()),
-                  onAbout: () => _scrollTo(_aboutKey),
-                  onSkills: () => _scrollTo(_skillsKey),
+                  onAbout:      () => _scrollTo(_aboutKey),
+                  onSkills:     () => _scrollTo(_skillsKey),
                   onExperience: () => _scrollTo(_experienceKey),
-                  onApps: () => _scrollTo(_appsKey),
-                  onContact: () => _scrollTo(_contactKey),
+                  onApps:       () => _scrollTo(_appsKey),
+                  onContact:    () => _scrollTo(_contactKey),
                 ),
               ),
             ),
-
-            // All sections as a single sliver
             SliverToBoxAdapter(
               child: Column(
                 children: [
                   LandingSection(
                     key: _landingKey,
                     onViewApps: () => _scrollTo(_appsKey),
-                    onContact: () => _scrollTo(_contactKey),
+                    onContact:  () => _scrollTo(_contactKey),
                   ),
                   AboutSection(key: _aboutKey),
                   SkillsSection(key: _skillsKey),
@@ -109,8 +108,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 class _HeaderDelegate extends SliverPersistentHeaderDelegate {

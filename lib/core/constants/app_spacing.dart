@@ -10,6 +10,6 @@ class AppSpacing {
   static const double xxxl = 80.0;
 
   static const double sectionPaddingV  = 100.0;
-  static const double maxContentWidth  = 1100.0;
+  static const double maxContentWidth  = 1000.0;
   static const double pageHorizontal   = 24.0;
 }
