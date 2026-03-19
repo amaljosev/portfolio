@@ -8,6 +8,7 @@ class HeaderSection extends StatelessWidget {
   final bool isDark;
   final VoidCallback onThemeToggle;
   final VoidCallback onAbout;
+  final VoidCallback onSkills;
   final VoidCallback onExperience;
   final VoidCallback onApps;
   final VoidCallback onContact;
@@ -17,6 +18,7 @@ class HeaderSection extends StatelessWidget {
     required this.isDark,
     required this.onThemeToggle,
     required this.onAbout,
+    required this.onSkills,
     required this.onExperience,
     required this.onApps,
     required this.onContact,
@@ -30,7 +32,7 @@ class HeaderSection extends StatelessWidget {
     return Container(
       height: 72,
       decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor.withValues(alpha:0.92),
+        color: theme.scaffoldBackgroundColor.withValues(alpha: 0.92),
         border: Border(
           bottom: BorderSide(
             color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
@@ -39,7 +41,9 @@ class HeaderSection extends StatelessWidget {
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxContentWidth,
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             child: Row(
@@ -61,7 +65,9 @@ class HeaderSection extends StatelessWidget {
                     fontFamily: 'Syne',
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
-                    color: theme.colorScheme.onPrimary,
+                    color: isDark
+                        ? theme.colorScheme.onPrimary
+                        : theme.colorScheme.primary,
                     letterSpacing: -0.5,
                   ),
                 ),
@@ -69,10 +75,11 @@ class HeaderSection extends StatelessWidget {
 
                 // Nav links (desktop only)
                 if (!isMobile) ...[
-                  _NavLink(label: 'About',      onTap: onAbout),
+                  _NavLink(label: 'About', onTap: onAbout),
+                  _NavLink(label: 'Skills', onTap: onSkills),
                   _NavLink(label: 'Experience', onTap: onExperience),
-                  _NavLink(label: 'Apps',       onTap: onApps),
-                  _NavLink(label: 'Contact',    onTap: onContact),
+                  _NavLink(label: 'Apps', onTap: onApps),
+                  _NavLink(label: 'Contact', onTap: onContact),
                   const SizedBox(width: AppSpacing.md),
                 ],
 
@@ -105,6 +112,7 @@ class HeaderSection extends StatelessWidget {
                   const SizedBox(width: AppSpacing.md),
                   _MobileMenu(
                     onAbout: onAbout,
+                    onSkills: onSkills,
                     onExperience: onExperience,
                     onApps: onApps,
                     onContact: onContact,
@@ -136,7 +144,7 @@ class _NavLinkState extends State<_NavLink> {
     final theme = Theme.of(context);
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
-      onExit:  (_) => setState(() => _hovered = false),
+      onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
         onTap: widget.onTap,
         child: Padding(
@@ -149,7 +157,7 @@ class _NavLinkState extends State<_NavLink> {
               fontWeight: FontWeight.w500,
               color: _hovered
                   ? theme.colorScheme.primary
-                  : theme.colorScheme.onSurface.withValues(alpha:0.55),
+                  : theme.colorScheme.onSurface.withValues(alpha: 0.55),
             ),
             child: Text(widget.label),
           ),
@@ -161,12 +169,14 @@ class _NavLinkState extends State<_NavLink> {
 
 class _MobileMenu extends StatelessWidget {
   final VoidCallback onAbout;
+  final VoidCallback onSkills;
   final VoidCallback onExperience;
   final VoidCallback onApps;
   final VoidCallback onContact;
 
   const _MobileMenu({
     required this.onAbout,
+    required this.onSkills,
     required this.onExperience,
     required this.onApps,
     required this.onContact,
@@ -181,17 +191,29 @@ class _MobileMenu extends StatelessWidget {
       ),
       onSelected: (value) {
         switch (value) {
-          case 'about':      onAbout();      break;
-          case 'experience': onExperience(); break;
-          case 'apps':       onApps();       break;
-          case 'contact':    onContact();    break;
+          case 'about':
+            onAbout();
+            break;
+          case 'skills':
+            onSkills();
+            break;
+          case 'experience':
+            onExperience();
+            break;
+          case 'apps':
+            onApps();
+            break;
+          case 'contact':
+            onContact();
+            break;
         }
       },
       itemBuilder: (_) => const [
-        PopupMenuItem(value: 'about',      child: Text('About')),
+        PopupMenuItem(value: 'about', child: Text('About')),
+        PopupMenuItem(value: 'skills', child: Text('Skills')),
         PopupMenuItem(value: 'experience', child: Text('Experience')),
-        PopupMenuItem(value: 'apps',       child: Text('Apps')),
-        PopupMenuItem(value: 'contact',    child: Text('Contact')),
+        PopupMenuItem(value: 'apps', child: Text('Apps')),
+        PopupMenuItem(value: 'contact', child: Text('Contact')),
       ],
     );
   }

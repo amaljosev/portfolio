@@ -8,18 +8,12 @@ import '../../../../core/widgets/section_wrapper.dart';
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
-  static const _skills = [
-    'Flutter', 'Dart', 'BLoC','GetX', 'Firebase', 'Razorpay', 'Supabase',
-    'REST APIs', 'Git', 'Clean Arch', 'UI/UX','Figma',
-    'Go Router', 'Hive', 'SQLite', 'CI/CD',
-  ];
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isMobile = ResponsiveBuilder.isMobile(context);
     final textColor = theme.colorScheme.onSurface;
-    final mutedColor = theme.colorScheme.onSurface.withValues(alpha:0.55);
+    final mutedColor = theme.colorScheme.onSurface.withValues(alpha: 0.55);
 
     return Container(
       decoration: BoxDecoration(
@@ -83,6 +77,7 @@ class AboutSection extends StatelessWidget {
   }
 
   Widget _buildProfileImage(BuildContext context) {
+    final theme = Theme.of(context);
     return FadeInWidget(
       delay: const Duration(milliseconds: 100),
       child: AspectRatio(
@@ -92,17 +87,17 @@ class AboutSection extends StatelessWidget {
           child: Image.asset(
             'assets/images/profile_pic.jpeg',
             fit: BoxFit.cover,
-            errorBuilder: (_, _, _) => Container(
+            errorBuilder: (_, __, ___) => Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
+                color: theme.cardColor,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Theme.of(context).dividerColor),
+                border: Border.all(color: theme.dividerColor),
               ),
               child: Center(
                 child: Icon(
                   Icons.person_outline_rounded,
                   size: 64,
-                  color: Theme.of(context).dividerColor,
+                  color: theme.dividerColor,
                 ),
               ),
             ),
@@ -114,7 +109,6 @@ class AboutSection extends StatelessWidget {
 
   Widget _buildAboutText(
       BuildContext context, Color textColor, Color mutedColor) {
-    Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -141,48 +135,7 @@ class AboutSection extends StatelessWidget {
             style: AppTextStyles.bodyMedium(mutedColor),
           ),
         ),
-        const SizedBox(height: AppSpacing.xl),
-        FadeInWidget(
-          delay: const Duration(milliseconds: 300),
-          child: Wrap(
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
-            children: _skills
-                .map((skill) => _SkillChip(label: skill))
-                .toList(),
-          ),
-        ),
       ],
-    );
-  }
-}
-
-class _SkillChip extends StatelessWidget {
-  final String label;
-  const _SkillChip({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    return Container(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md, vertical: AppSpacing.xs + 2),
-      decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF1E1D2E)
-            : Color(0xFFF5EDD6),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontFamily: 'Inter',
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: theme.colorScheme.primary,
-        ),
-      ),
     );
   }
 }

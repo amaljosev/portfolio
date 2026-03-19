@@ -8,6 +8,7 @@ import 'package:portfolio/features/home/sections/contact_section.dart';
 import 'package:portfolio/features/home/sections/experience_section.dart';
 import 'package:portfolio/features/home/sections/header_section.dart';
 import 'package:portfolio/features/home/sections/landing_section.dart';
+import 'package:portfolio/features/home/sections/skills_section.dart';
 import '../../../core/theme/bloc/theme_bloc.dart';
 import '../../../core/utils/scroll_service.dart';
 
@@ -45,6 +46,7 @@ class _HomePageState extends State<HomePage> {
 
   final GlobalKey _landingKey    = GlobalKey();
   final GlobalKey _aboutKey      = GlobalKey();
+  final GlobalKey _skillsKey      = GlobalKey();
   final GlobalKey _experienceKey = GlobalKey();
   final GlobalKey _appsKey       = GlobalKey();
   final GlobalKey _contactKey    = GlobalKey();
@@ -79,6 +81,7 @@ class _HomePageState extends State<HomePage> {
                   onThemeToggle: () =>
                       context.read<ThemeBloc>().add(ToggleThemeEvent()),
                   onAbout:      () => _scrollTo(_aboutKey),
+                   onSkills: () => _scrollTo(_skillsKey),
                   onExperience: () => _scrollTo(_experienceKey),
                   onApps:       () => _scrollTo(_appsKey),
                   onContact:    () => _scrollTo(_contactKey),
@@ -96,6 +99,7 @@ class _HomePageState extends State<HomePage> {
                     onContact:  () => _scrollTo(_contactKey),
                   ),
                   AboutSection(key: _aboutKey),
+                  SkillsSection(key: _skillsKey), 
                   ExperienceSection(key: _experienceKey),
                   AppsSection(key: _appsKey),
                   ContactSection(key: _contactKey),
