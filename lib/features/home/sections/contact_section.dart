@@ -84,6 +84,12 @@ class ContactSection extends StatelessWidget {
                         label: 'LinkedIn',
                         onTap: () => UrlHelper.openUrl(AppConstants.linkedin),
                       ),
+                      _ContactLink(
+                         
+                        icon: Icons.download_rounded,
+                        label: 'Resume',
+                        onTap: () => UrlHelper.downloadResume(),
+                      ),
                     ],
                   ),
                 ),

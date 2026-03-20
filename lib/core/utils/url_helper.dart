@@ -1,4 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
+import 'package:universal_html/html.dart' as html;
+
 
 class UrlHelper {
   static Future<void> openUrl(String url) async {
@@ -14,4 +16,11 @@ class UrlHelper {
       await launchUrl(uri);
     }
   }
+  static void downloadResume() {
+  final _ = html.AnchorElement(
+    href: 'assets/resume/amalresume.pdf',
+  )
+    ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
+    ..click();
+}
 }
