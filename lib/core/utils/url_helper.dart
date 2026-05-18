@@ -17,17 +17,12 @@ class UrlHelper {
   }
 
   
-  static void downloadResume() {
-  final assetUrl = Uri.base
-      .resolve('assets/resume/amalFlutterDevResume.pdf')
-      .toString();
-
-  final anchor = html.AnchorElement(href: assetUrl)
-    ..setAttribute('download', 'AmalFlutterResume.pdf')
-    ..style.display = 'none';
-    
-  html.document.body?.append(anchor);
-  anchor.click();
-  anchor.remove();
+  static Future<void> downloadResume() async {
+  const url =
+      'https://amaljosev.github.io/portfolio/assets/resume/amalFlutterDevResume.pdf';
+  final uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
 }
 }
