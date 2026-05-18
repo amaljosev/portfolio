@@ -1,7 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:universal_html/html.dart' as html;
 
-
 class UrlHelper {
   static Future<void> openUrl(String url) async {
     final uri = Uri.parse(url);
@@ -16,11 +15,19 @@ class UrlHelper {
       await launchUrl(uri);
     }
   }
+
   static void downloadResume() {
-  final _ = html.AnchorElement(
-    href: 'assets/resume/amalFlutterDevResume.pdf',
-  )
-    ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
-    ..click();
-}
+    final baseHref = Uri.base.toString();
+    final assetUrl = Uri.parse(
+      baseHref,
+    ).resolve('assets/resume/amalFlutterDevResume.pdf');
+
+    final anchor = html.AnchorElement(href: assetUrl.toString())
+      ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
+      ..style.display = 'none';
+
+    html.document.body?.append(anchor);
+    anchor.click();
+    anchor.remove();
+  }
 }
