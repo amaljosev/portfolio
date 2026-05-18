@@ -69,4 +69,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/resume/
+    - assets/resume/amalFlutterDevResume.pdf

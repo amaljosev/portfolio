@@ -23,9 +23,9 @@ class UrlHelper {
       .toString();
 
   final anchor = html.AnchorElement(href: assetUrl)
-    ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
+    ..setAttribute('download', 'AmalFlutterResume.pdf')
     ..style.display = 'none';
-
+    
   html.document.body?.append(anchor);
   anchor.click();
   anchor.remove();
