@@ -16,18 +16,18 @@ class UrlHelper {
     }
   }
 
+  
   static void downloadResume() {
-    final baseHref = Uri.base.toString();
-    final assetUrl = Uri.parse(
-      baseHref,
-    ).resolve('assets/resume/amalFlutterDevResume.pdf');
+  final assetUrl = Uri.base
+      .resolve('assets/resume/amalFlutterDevResume.pdf')
+      .toString();
 
-    final anchor = html.AnchorElement(href: assetUrl.toString())
-      ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
-      ..style.display = 'none';
+  final anchor = html.AnchorElement(href: assetUrl)
+    ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
+    ..style.display = 'none';
 
-    html.document.body?.append(anchor);
-    anchor.click();
-    anchor.remove();
-  }
+  html.document.body?.append(anchor);
+  anchor.click();
+  anchor.remove();
+}
 }
