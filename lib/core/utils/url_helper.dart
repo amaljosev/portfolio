@@ -18,7 +18,7 @@ class UrlHelper {
   }
   static void downloadResume() {
   final _ = html.AnchorElement(
-    href: 'assets/resume/amalresume.pdf',
+    href: 'assets/resume/amalFlutterDevResume.pdf',
   )
     ..setAttribute('download', 'Amal_Flutter_Resume.pdf')
     ..click();
