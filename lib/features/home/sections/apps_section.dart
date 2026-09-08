@@ -11,14 +11,6 @@ class AppsSection extends StatelessWidget {
 
   static const _apps = [
     _App(
-      name: 'Pursuit',
-      description:
-          'A production-ready habit tracker built with Clean Architecture, SQLite, and FL Chart. Features streak tracking, partial progress logging, and local notifications.',
-      image: 'assets/images/pursuit_icon.webp',
-      playStoreUrl: AppConstants.pursuitAppLink,
-      githubUrl: AppConstants.pursuitGitLink,
-    ),
-    _App(
       name: 'Routine',
       description:
           'Full-featured productivity app with an interactive diary, gesture-based sticker overlays, Supabase integration, and offline-first SQLite storage.',
@@ -26,7 +18,15 @@ class AppsSection extends StatelessWidget {
       playStoreUrl: AppConstants.routineAppLink,
       githubUrl: AppConstants.routineGitLink,
     ),
-    
+    _App(
+      name: 'Pursuit',
+      description:
+          'A production-ready habit tracker built with Clean Architecture, SQLite, and FL Chart. Features streak tracking, partial progress logging, and local notifications.',
+      image: 'assets/images/pursuit_icon.webp',
+      playStoreUrl: AppConstants.pursuitAppLink,
+      githubUrl: AppConstants.pursuitGitLink,
+    ),
+
     _App(
       name: 'Ddata App',
       description:

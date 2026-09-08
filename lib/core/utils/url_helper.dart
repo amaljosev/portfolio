@@ -1,5 +1,4 @@
 import 'package:url_launcher/url_launcher.dart';
-import 'package:universal_html/html.dart' as html;
 
 class UrlHelper {
   static Future<void> openUrl(String url) async {
